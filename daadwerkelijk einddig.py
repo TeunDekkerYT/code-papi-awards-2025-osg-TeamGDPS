@@ -1,9 +1,11 @@
+#imports
 import pygame
 pygame.init()
 import random
 import time
 from gpiozero import Button
 import math
+#vragen + antwoorden vars
 vragen = ["als iemand je adress vraagt geef je hem dan","als mensen gegevens vragen zoals je ip geef je het dan","als mensen je pesten pest je ze dan terug","wat moet je beter niet doen met cyberpesten","hoe kun je cyberpesten helpen voorkomen","wat kan je doen als iemand anders gepest wordt","wat kun je doen als het pesten door blijft gaan","wat is online respect","is cyberpesten strafbaar?","wat betekent digitale weerbaarheid","wat is goed bewijs van cyberpesten","wie kan je helpen bij cyberpesten","waarom is cyberpesten extra vervelend","welke situatie is cyberpesten","wat betekent iemand blokkeren"]
 antwoord_a = ["ja","ja","ja","terug pesten","sterke wachtwoorden gebruiken","meedoen","extra hulp inschakelen","aardig zijn tegen anderen","ja","jezelf online kunnen beschermen","screenshots van berichten maken","een docent of ouder","het kan altijd door blijven gaan","iemand uitschelden via social media","dat iemand je geen berichten meer kan sturen"]
 antwoord_b = ["nee","nee","nee","hulp vragen","alles openbaar delen","steun geven en melden","stoppen met internet","zeggen wat je wilt","nee","veel volgers hebben","geruchten","niemand","het gebeurt maar 1 keer","een foto liken","iemand volgen"]
@@ -21,11 +23,12 @@ b = ""
 c = ""
 rand:int
 preparing = True
+#buttons
 but1 = Button(21)
 but2 = Button(20)
 but3 = Button(26)
 pressed = False
-#dimensions screen
+#dimensions scherm zodat niet kaboem
 
 SCREEN_WIDTH = 1920
 SCREEN_LENGHT = 1080
@@ -41,6 +44,7 @@ B = 0
 A = 0
 right = False
 wrong = False
+#pos van vierkanten
 pos1x = random.randint(10,1500)
 pos2x = random.randint(10,1500)
 pos3x = random.randint(10,1500)
@@ -83,12 +87,12 @@ size5 = random.randint(50,450)
 size6 = random.randint(50,450)
 size7 = random.randint(50,450)
 image1.set_alpha(40)
-#loop
+#geluid af spelen
 def sound(what_sound):
     pygame.mixer.init()
     pygame.mixer.Sound(what_sound)
     pygame.mixer.Sound(what_sound).play().set_volume(1)
-
+#het vragen algoritme
 def prepare():
     global rand
     global a
@@ -134,8 +138,10 @@ def prepare():
         pass
 screen.blit(imp,(0,0))
 run = True
+#de loop
 while run:
     screen.fill((0,0,0))
+    #zorgt dat hij prepare doet
     if preparing == True:
         prepare()
         preparing = False
@@ -201,9 +207,10 @@ while run:
                     preparing = True
                     pressed = True
                     wrong = True
+            #zodat je niet de knop ingedrukt kan houden en dat hij constant blijft antwoorden
         if not but1.is_pressed and not but2.is_pressed and not but3.is_pressed:
             pressed = False
-    
+    #load de vierkante
     rotated_im1 = pygame.transform.rotate(image1,angle1)
     screen.blit(pygame.transform.scale(rotated_im1,(size1,size1)), (pos1x,pos1y))
     angle1 += rotate1
@@ -231,7 +238,7 @@ while run:
     rotated_im1 = pygame.transform.rotate(image1,angle7)
     screen.blit(pygame.transform.scale(rotated_im1,(size7,size7)), (pos7x,pos7y))
     angle7 += rotate7
-    
+    #zorgt voor de text
     my_font = pygame.font.Font(font, 70)
     text_surface = my_font.render(a, False, text_color)
     x = 960
@@ -270,7 +277,7 @@ while run:
     x = x-(width1/2)
     y = y-(height1/2)
     screen.blit(text_surface,(x,y))
-    
+    #rotatie van vierkanten en groote veranderingen 
     if right == True:
         angle1 = 0
         angle2 = 0
@@ -358,7 +365,7 @@ while run:
             print("quiting")
             
     pygame.display.update()
-
+#zorgt dat de window sluit
 pygame.quit()
 print("heb je al een keer gehoort van de godot particle system de perfecte manier om particles te maken en je levensproblemen op te lossen nu verkrijgbaar op de godot game engine de perfecte manier om games te maken en levensproblemen te krijgen?")
 print("quit succesfully done")
