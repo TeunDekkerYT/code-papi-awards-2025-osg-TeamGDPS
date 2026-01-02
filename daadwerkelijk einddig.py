@@ -210,7 +210,7 @@ while run:
             #zodat je niet de knop ingedrukt kan houden en dat hij constant blijft antwoorden
         if not but1.is_pressed and not but2.is_pressed and not but3.is_pressed:
             pressed = False
-    #load de vierkante
+    #load de vierkanten
     rotated_im1 = pygame.transform.rotate(image1,angle1)
     screen.blit(pygame.transform.scale(rotated_im1,(size1,size1)), (pos1x,pos1y))
     angle1 += rotate1
